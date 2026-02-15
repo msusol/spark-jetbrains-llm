@@ -1,0 +1,19 @@
+{
+  "default_provider": "fast_python_coder",
+  "providers": {
+    "fast_python_coder": {
+      "type": "openai",
+      "base_url": "http://fast_python_coder:8000/v1",
+      "api_key": "dummy-key"
+    },
+    "general_chat_llm": {
+      "type": "openai",
+      "base_url": "http://general_chat_llm:8000/v1",
+      "api_key": "dummy-key"
+    }
+  },
+  "model_map": {
+    "fast-python-coder": "fast_python_coder",
+    "general-chat-llm": "general_chat_llm"
+  }
+}

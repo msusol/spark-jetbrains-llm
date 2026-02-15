@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  fast_python_coder:
+    image: nvcr.io/nim/nvidia/llm-nim:latest
+    container_name: fast_python_coder
+    restart: unless-stopped
+    environment:
+      NGC_API_KEY: "${NGC_API_KEY}"
+      NIM_MODEL_NAME: "${FAST_MODEL_URI}"
+      NIM_MANIFEST_ALLOW_UNSAFE: "1"
+      NIM_SERVED_MODEL_NAME: "fast-python-coder"
+      NIM_SERVER_PORT: "8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
+    ports:
+      - "8101:8000"
+
+  general_chat_llm:
+    image: nvcr.io/nim/nvidia/llm-nim:latest
+    container_name: general_chat_llm
+    restart: unless-stopped
+    environment:
+      NGC_API_KEY: "${NGC_API_KEY}"
+      NIM_MODEL_NAME: "${GENERAL_MODEL_URI}"
+      NIM_MANIFEST_ALLOW_UNSAFE: "1"
+      NIM_SERVED_MODEL_NAME: "general-chat-llm"
+      NIM_SERVER_PORT: "8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
+    ports:
+      - "8102:8000"
+
+  openai_router:
+    image: ghcr.io/xenova/openai-router:latest
+    container_name: spark_openai_router
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAI_ROUTER_CONFIG: /app/config/router-config.json
+    volumes:
+      - ./router-config.json:/app/config/router-config.json:ro
