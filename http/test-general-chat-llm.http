@@ -1,0 +1,14 @@
+### Test general-chat-llm model
+POST http://localhost:8000/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer test-key
+
+{
+  "model": "general-chat-llm",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain Python list comprehensions in 3 bullet points."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+### Test fast-python-coder model
+POST http://localhost:8000/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer test-key
+
+{
+  "model": "fast-python-coder",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a small Python function that reverses a list."
+    }
+  ]
+}
